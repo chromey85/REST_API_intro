@@ -9,9 +9,20 @@ exports.addMovie = async (req, res) => {
     res.status(500).send({ err: error.message });
   }
 };
+
 exports.listMovies = async (req, res) => {
   try {
     const movies = await Movie.find({});
+    res.status(200).send({ allMovie: movies });
+  } catch (error) {
+    console.log(error, `You messed up with the find`);
+    res.status(500).send({ err: error.message });
+  }
+};
+
+exports.updateMovies = async (req, res) => {
+  try {
+    const updateMovies = await Movie.updateOne({});
     res.status(200).send({ allMovie: movies });
   } catch (error) {
     console.log(error, `You messed up with the find`);
