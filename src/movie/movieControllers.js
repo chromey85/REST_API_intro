@@ -1,3 +1,5 @@
+const req = require("express/lib/request");
+const res = require("express/lib/response");
 const Movie = require("./movieModel");
 
 exports.addMovie = async (req, res) => {
@@ -20,12 +22,21 @@ exports.listMovies = async (req, res) => {
   }
 };
 
-exports.updateMovies = async (req, res) => {
+exports.updateMovie = async (req, res) => {
   try {
-    const updateMovies = await Movie.updateOne({});
-    res.status(200).send({ allMovie: movies });
+    const updateMovie = await Movie.updateOne({title: title});
+    res.status(200).send({title: updateMovie});
   } catch (error) {
-    console.log(error, `You messed up with the find`);
+    console.log(error, `You messed up with the update`);
     res.status(500).send({ err: error.message });
+  }
+};
+
+exports.deleteMovie = async (req, res) => {
+  try {
+    const deleteMovie = await Movie.deleteOne({title: title})
+    res.status(200).send({})
+  } catch (error) {
+    console.log(error, "It didn't Delete")
   }
 };
