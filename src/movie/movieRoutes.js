@@ -3,13 +3,13 @@ const {
   addMovie,
   listMovies,
   updateMovie,
-  deleteOne,
+  deleteMovie,
 } = require("./movieControllers");
 const movieRouter = Router();
 
 movieRouter.post("/movie", addMovie);
 movieRouter.get("/movie", listMovies);
 movieRouter.put("/movie/:title", updateMovie);
-// movieRouter.delete("/movies", deleteOne);
+movieRouter.delete("/movies", deleteMovie);
 
 module.exports = movieRouter;
