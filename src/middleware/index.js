@@ -33,21 +33,24 @@ exports.checkToken = async (req, res, next) => {
   try {
     // const authHeader = req.header("Authorization");
     // const token = authHeader.replace("Bearer ", "");
-    const authHeader = req.header("Authorization").replace("Bearer ", "");
-    const decodedToken = await jwt.verify(token, process.env.SECRET);
-    const user = await User.findById(decodedToken._id);
+    // const authHeader = req.header("Authorization").replace("Bearer ", "");
+    const decodedToken = await jwt.verify(
+      req.header("Authorization").replace("Bearer ", ""),
+      process.env.SECRET
+    );
+    req.user = await User.findById(decodedToken._id);
     if (req.user) {
       next();
     } else {
       throw new Error("No User Found");
     }
-    console.log(authHeader);
-    console.log(token);
-    console.log(decodedToken);
-    console.log(user);
+    // console.log(authHeader);
+    // console.log(token);
+    // console.log(decodedToken);
+    // console.log(user);
     next();
   } catch (error) {
     console.log(error);
-    res.status(500).send({ err: error.log });
+    res.status(500).send({ err: error.message });
   }
 };

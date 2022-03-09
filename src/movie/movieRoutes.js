@@ -9,7 +9,8 @@ const movieRouter = Router();
 
 movieRouter.post("/movie", addMovie);
 movieRouter.get("/movie", listMovies);
-movieRouter.put("/movie/:title", updateMovie);
-movieRouter.delete("/movies", deleteMovie);
+movieRouter.patch("/movie", updateMovie);
+// movieRouter.delete("/movie/:title", deleteMovie);
+movieRouter.delete("/movie/:filterKey/:filterVal", deleteMovie);
 
 module.exports = movieRouter;
