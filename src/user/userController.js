@@ -33,15 +33,19 @@ exports.listUser = async (req, res) => {
 
 exports.updatePassword = async (req, res) => {
   try {
-    const updatePassword = await User.updateOne(
+    // console.log(req.user);
+    const updatePasswords = await User.updateOne(
       { username: req.user.username },
       { password: req.body.password }
     );
-    if (updatePassword.modifiedCount > 0) {
+    // console.log(updatePasswords);
+    if (updatePasswords.modifiedCount > 0) {
+      console.log("1");
       res.status(200).send({ msg: "Successfully updated Password" });
-    } else {
-      throw new Error("You messed up with the update");
     }
+    // } else {
+    //   throw new Error("You messed up with the update");
+    // }
   } catch (error) {
     console.log(error);
     res.status(500).send({ err: error.message });
